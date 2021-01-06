@@ -1,4 +1,7 @@
-datosDeLaConcesionaria = [
+import Auto from './models/Auto.js';
+import Moto from './models/Moto.js';
+
+let datosDeLaConcesionaria = [
     {
         marca: "Peugeot",
         modelo: "206",
@@ -25,29 +28,7 @@ datosDeLaConcesionaria = [
     },
 ]
 
-class Vehiculo {
-    constructor(marca, modelo, precio) {
-        this.marca = marca
-        this.modelo = modelo
-        this.precio = precio
-    }
-}
-class Auto extends Vehiculo {
-    constructor(marca, modelo, puertas, precio) {
-        super(marca, modelo, precio)
-        this.puertas = puertas
-        this.cilindrada = null
-    }
-}
-class Moto extends Vehiculo {
-    constructor(marca, modelo, cilindrada, precio) {
-        super(marca, modelo, precio)
-        this.cilindrada = cilindrada
-        this.puertas = null
-    }
-}
-
-vehiculos = [];
+const vehiculos = [];
 datosDeLaConcesionaria.forEach(dato => {
     if (dato.cilindrada == undefined) {
         vehiculos.push(new Auto(dato.marca, dato.modelo, dato.puertas, dato.precio))
@@ -58,15 +39,8 @@ datosDeLaConcesionaria.forEach(dato => {
 
 //Mostrar los datos de la concesionaria
 vehiculos.forEach(vehiculo => {
-    if (vehiculo.cilindrada == null) {
-        console.log(
-            `Marca: ${vehiculo.marca} // Modelo: ${vehiculo.modelo} // Puertas: ${vehiculo.puertas} // Precio: ${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(parseFloat(vehiculo.precio))}`
-        );
-    } else {
-        console.log(`Marca: ${vehiculo.marca} // Modelo: ${vehiculo.modelo} // Cilindrada: ${vehiculo.cilindrada} // Precio: ${new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(parseFloat(vehiculo.precio))}`);
-    }
+    vehiculo.mostrar()
 })
-
 console.log('=============================');
 
 
